@@ -25,6 +25,7 @@ Graph *CreateGraph();
 void AddUser(Graph *G);
 void RemoveUser(Graph *G, int id);
 
+void AddFriend(Graph *G, int userID, int friendID);
 bool IsFriend(Graph *G, int idA, int idB);
 void RegFriends(Graph *G, int userID, int K);
 void NewFriends(Graph *G, int userID);
