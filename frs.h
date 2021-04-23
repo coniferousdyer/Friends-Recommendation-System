@@ -2,6 +2,7 @@
 #define FRS_H
 
 #include <stdbool.h>
+#include <stdlib.h>
 
 // The information about each user is contained in a struct
 typedef struct User
@@ -22,12 +23,14 @@ typedef struct User
 */
 typedef struct Graph
 {
-    int numUsers;   // Number of users
-    User *userList; // List of users
+    int numUsers;    // Number of users
+    User **userList; // List of users
 } Graph;
 
-User *CreateUser();   // Initialise an empty user
-Graph *CreateGraph(); // Initialise an empty graph
+User *CreateUser();      // Initialise an empty user
+User **CreateUserList();  // Initialise an empty userlist
+int *CreateFriendList(); // Initialise an empty integer array friendList
+Graph *CreateGraph();    // Initialise an empty graph
 
 void AddUser(Graph *G);            // To register a user
 void RemoveUser(Graph *G, int id); // To unregister a user
@@ -39,5 +42,7 @@ bool IsFriend(Graph *G, int idA, int idB);          // To check if A is a friend
 void RegFriends(Graph *G, int userID, int K);
 // To recommend friends to new users
 void NewFriends(Graph *G, int userID);
+
+Graph *DeleteGraph(); // To delete the graph at the end of the program
 
 #endif
