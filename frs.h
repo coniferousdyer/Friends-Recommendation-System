@@ -25,6 +25,8 @@ typedef struct Graph
 {
     int numUsers;    // Number of users
     User **userList; // List of users
+    int *minHeap;    // To retrieve minimum possible ID from deleted elements
+    int heapSize;
 } Graph;
 
 User *CreateUser();      // Initialise an empty user
@@ -34,6 +36,8 @@ Graph *CreateGraph();    // Initialise an empty graph
 
 void AddUser(Graph *G);            // To register a user
 void RemoveUser(Graph *G, int id); // To unregister a user
+
+void removefriendofuser(Graph *G, int num); // To remove user with ID num from friendList of users
 
 void AddFriend(Graph *G, int userID, int friendID); // To add a friend
 bool IsFriend(Graph *G, int idA, int idB);          // To check if A is a friend of B
