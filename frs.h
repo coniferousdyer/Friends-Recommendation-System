@@ -28,7 +28,7 @@ typedef struct Graph
 } Graph;
 
 User *CreateUser();      // Initialise an empty user
-User **CreateUserList();  // Initialise an empty userlist
+User **CreateUserList(); // Initialise an empty userlist
 int *CreateFriendList(); // Initialise an empty integer array friendList
 Graph *CreateGraph();    // Initialise an empty graph
 
@@ -43,6 +43,6 @@ void RegFriends(Graph *G, int userID, int K);
 // To recommend friends to new users
 void NewFriends(Graph *G, int userID);
 
-Graph *DeleteGraph(); // To delete the graph at the end of the program
+Graph *DeleteGraph(Graph *G); // To delete the graph at the end of the program
 
 #endif
