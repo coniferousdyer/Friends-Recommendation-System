@@ -3,6 +3,7 @@
 NodePtr CreateNode()
 {
     NodePtr N = (NodePtr)malloc(sizeof(Node));
+    assert(N != NULL && "Malloc returned NULL in CreateNode().");
     N->next = NULL;
 
     return N;
@@ -11,6 +12,7 @@ NodePtr CreateNode()
 QueuePtr CreateQueue()
 {
     QueuePtr Q = (QueuePtr)malloc(sizeof(Queue));
+    assert(Q != NULL && "Malloc returned NULL in CreateQueue().");
     Q->front = NULL;
     Q->rear = NULL;
 

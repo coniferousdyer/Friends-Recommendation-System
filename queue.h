@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <assert.h>
+
+// #define NDEBUG
 
 // Node of a queue
 typedef struct Node
