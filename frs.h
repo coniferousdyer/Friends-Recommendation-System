@@ -17,7 +17,7 @@ typedef struct User
 
 /*
  * We implement our network as a graph.
- * The graph is represented as an array of linked lists.
+ * The graph is represented as an array of arrays.
  * Each element of the array is pointer to a struct User.
  * Each User has a pointer to an integer array containing their friends.
 */
