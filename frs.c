@@ -113,6 +113,8 @@ void AddUser(Graph *G)
     scanf("%d", &U->age);
     printf("Enter user's city: ");
     scanf(" %[^\n]", U->city);
+    printf("Enter user's school: ");
+    scanf(" %[^\n]", U->school);
 
     G->userList[U->id] = U; // Putting user in the correct position in userList
 

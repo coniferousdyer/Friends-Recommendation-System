@@ -12,6 +12,7 @@ typedef struct User
     char name[20];     // Name of user
     int age;           // Age of user
     char city[15];     // Name of city of user
+    char school[15];   // Name of school user went to
     int numFriends;    // Number of friends user has
     Node **friendList; // List of friends (a hash table)
     int bucketNo;      // Number of buckets in friendList
