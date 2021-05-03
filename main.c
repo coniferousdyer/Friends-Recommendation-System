@@ -6,20 +6,8 @@ int main(void)
     Graph *G = CreateGraph();
 
     AddUser(G);
-    AddUser(G);
-    AddUser(G);
-    RemoveUser(G, 1);
-    AddUser(G);
-    AddUser(G);
-    RemoveUser(G, 0);
-    AddUser(G);
-    RemoveUser(G, 0);
 
-    for (int i = 0; i < 5; i++)
-    {
-        if (G->userList[i] != NULL)
-            printf("%d %s %s\n", G->userList[i]->id, G->userList[i]->name, G->userList[i]->city);
-    }
+    printf("%d %s %s %s\n", G->userList[0]->id, G->userList[0]->name, G->userList[0]->city, G->userList[0]->school);
 
     DeleteGraph(G);
 
@@ -39,7 +27,7 @@ int main(void)
 // AddUser works
 // RemoveUser works
 
-// RemoveFriendFromUser 
+// RemoveFriendFromUser
 // AddFriend
 // RemoveFriend
 // IsFriend

@@ -32,3 +32,18 @@ We also include a minHeap in the graph, which stores the IDs of the users delete
 
 # Working
 
+We make use of hashing to optimise the time taken for operations. Searching for a user in the userList of the graph can be done in O(1) time, as the array provides random access. Since the number of users are not known beforehand, we allocate a dynamic array of size 2, and double the size, reallocating elements every time the array is full. We follow the same procedure for the minHeap.
+
+Each user starts off with a friendList of size 2, since again, the number of friends a user can have is not known beforehand. We again use a dynamic array here. However, random access does not help us here, as the friends' IDs are not placed in the corresponding indices, to conserve memory and time. 
+
+Instead, we use separate chaining. Each element of the dynamic array is a bucket containing a few of the friends of the user. When the load factor becomes 1, we perform rehashing, doubling the table size.
+
+<br>
+<p align="center">
+<img src="Images/Rehashing.png">
+</p>
+<br>
+
+When we <strong>ADD A USER</strong>, we first check the minHeap to see if the ID of any previously deleted user is available or not. If heapSize = 0 (minHeap is empty), we assign the user ```G->maxUserID + 1``` as their ID. If not, we assign the user ```G->minHeap[0]```, the minimum ID in the heap. In this way, we guarantee that the user gets the minimum possible ID, while utilising left over space. An average of O(1) time is taken to add the user while O(log n) time is taken to maintain the heap property.
+
+When we <strong>DELETE A USER</strong>, we free the memory associated with the user and insert their ID into the minHeap, so that any future users can be assigned that ID. We also delete the user from the friendLists of all the other users who have added that user as a friend. Deletion takes O(1) time, insertion of ID into the minHeap takes O(log n) time and removal of user from friendList of all users (```removefriendofuser()```) takes at worst O(n) time.
