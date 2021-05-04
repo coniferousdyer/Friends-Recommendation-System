@@ -138,7 +138,7 @@ void AddUser(Graph *G)
 void RemoveUser(Graph *G, int id)
 {
     // User does not exist
-    if (G->userList[id] == NULL)
+    if (G->userList[id] == NULL || id > G->maxUserID)
     {
         printf("\n\nUser with ID %d does not exist.\n\n", id);
         return;
@@ -174,7 +174,7 @@ void removefriendofuser(Graph *G, int num)
 void AddFriend(Graph *G, int userID, int friendID)
 {
     // Checking if friend actually exists
-    if (G->userList[friendID] == NULL)
+    if (G->userList[friendID] == NULL || friendID > G->maxUserID)
     {
         printf("\n\nSuch a user does not exist and cannot be added as a friend.\n\n");
         return;
@@ -196,13 +196,13 @@ void AddFriend(Graph *G, int userID, int friendID)
     if (G->userList[userID]->numFriends / G->userList[userID]->bucketNo == 1)
         H_Rehash(G, userID);
 
-    printf("%s is now a friend of %s!\n\n", G->userList[friendID]->name, G->userList[userID]->name);
+    printf("\n\n%s is now a friend of %s!\n\n", G->userList[friendID]->name, G->userList[userID]->name);
 }
 
 void RemoveFriend(Graph *G, int userID, int friendID)
 {
     // User does not exist
-    if (G->userList[friendID] == NULL)
+    if (G->userList[friendID] == NULL || friendID > G->maxUserID)
     {
         printf("\n\nUser with ID %d does not exist.\n\n", friendID);
         return;
@@ -221,9 +221,9 @@ void RemoveFriend(Graph *G, int userID, int friendID)
 void IsFriend(Graph *G, int idA, int idB)
 {
     // Checking if friend actually exists
-    if (G->userList[idB] == NULL)
+    if (G->userList[idB] == NULL || idB > G->maxUserID)
     {
-        printf("\n\nSuch a user does not exist and cannot be as a friend.\n\n");
+        printf("\n\nSuch a user does not exist and cannot be a friend of the user.\n\n");
         return;
     }
 
@@ -244,7 +244,7 @@ void IsFriend(Graph *G, int idA, int idB)
 void RegFriends(Graph *G, int userID, int K)
 {
     // User does not exist
-    if (G->userList[userID] == NULL)
+    if (G->userList[userID] == NULL || userID > G->maxUserID)
     {
         printf("\n\nUser with ID %d does not exist.\n\n", userID);
         return;
