@@ -276,7 +276,7 @@ void RegFriends(Graph *G, int userID, int K)
         }
     }
 
-    while (true)
+    while (!Empty(Q))
     {
         int u = Q->front->id; // u -> current node in queue
         Dequeue(Q);
@@ -318,6 +318,12 @@ end:
 
     while (scanf("%d", &friendID) > 0)
     {
+        if (G->userList[friendID] == NULL || friendID > G->maxUserID)
+        {
+            printf("\nUser with ID %d does not exist.\n", friendID);
+            continue;
+        }
+
         H_Insert(G, userID, friendID);
         count++;
     }

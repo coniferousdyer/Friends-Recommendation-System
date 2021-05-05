@@ -5,7 +5,7 @@ int main(void)
 {
     Graph *G = CreateGraph();
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 7; i++)
         AddUser(G);
 
     printf("%d %s %s %s\n", G->userList[0]->id, G->userList[0]->name, G->userList[0]->city, G->userList[0]->school);
@@ -13,18 +13,7 @@ int main(void)
     for (int i = 1; i < 3; i++)
         AddFriend(G, 0, i);
 
-    RemoveUser(G, 2);
-    RemoveUser(G, 1);
-
-    for (int i = 0; i < G->userList[0]->bucketNo; i++)
-    {
-        Node *temp = G->userList[0]->friendList[i];
-        while (temp != NULL)
-        {
-            printf("%d ", temp->id);
-            temp = temp->next;
-        }
-    }
+    RegFriends(G, 0, 10);
 
     printf("\n");
 
