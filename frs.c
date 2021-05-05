@@ -164,7 +164,7 @@ void removefriendofuser(Graph *G, int num)
 {
     for (int i = 0; i <= G->maxUserID; i++)
     {
-        if (G->userList[num] == NULL || i == num)
+        if (G->userList[i] == NULL || i == num)
             continue;
 
         H_Delete_Without_Text(G, i, num);

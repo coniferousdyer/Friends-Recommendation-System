@@ -13,8 +13,8 @@ int main(void)
     for (int i = 1; i < 3; i++)
         AddFriend(G, 0, i);
 
-    RemoveFriend(G, 0, 2);
-    RemoveFriend(G, 0, 10);
+    RemoveUser(G, 2);
+    RemoveUser(G, 1);
 
     for (int i = 0; i < G->userList[0]->bucketNo; i++)
     {
@@ -47,7 +47,7 @@ int main(void)
 // RemoveUser works
 // AddFriend works
 // IsFriend works
-// RemoveFriendFromUser works
 // RemoveFriend works
+// RemoveFriendFromUser works
 
 // RegFriends
