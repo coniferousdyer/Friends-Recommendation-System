@@ -107,13 +107,13 @@ void AddUser(Graph *G)
     ++G->numUsers; // Increasing number of users
 
     // Input user details
-    printf("Enter user's name: ");
+    printf("Enter your name: ");
     scanf(" %[^\n]", U->name);
-    printf("Enter user's age: ");
+    printf("Enter your age: ");
     scanf("%d", &U->age);
-    printf("Enter user's city: ");
+    printf("Enter your city: ");
     scanf(" %[^\n]", U->city);
-    printf("Enter user's school: ");
+    printf("Enter your school: ");
     scanf(" %[^\n]", U->school);
 
     G->userList[U->id] = U; // Putting user in the correct position in userList
@@ -132,7 +132,7 @@ void AddUser(Graph *G)
             G->userList[i] = NULL;
     }
 
-    printf("\nUser has been successfully registered!\n\n");
+    printf("\nYou have been successfully registered with ID %d!\n\n", U->id);
 }
 
 void RemoveUser(Graph *G, int id)
@@ -173,19 +173,6 @@ void removefriendofuser(Graph *G, int num)
 
 void AddFriend(Graph *G, int userID, int friendID)
 {
-    // Checking if friend actually exists
-    if (G->userList[friendID] == NULL || friendID > G->maxUserID)
-    {
-        printf("\n\nSuch a user does not exist and cannot be added as a friend.\n\n");
-        return;
-    }
-
-    if (friendID == userID)
-    {
-        printf("\n\nA user cannot be their own friend.\n\n");
-        return;
-    }
-
     // Inserting it into the hash table friendList of user
     H_Insert(G, userID, friendID);
 
@@ -196,18 +183,11 @@ void AddFriend(Graph *G, int userID, int friendID)
     if (G->userList[userID]->numFriends / G->userList[userID]->bucketNo == 1)
         H_Rehash(G, userID);
 
-    printf("\n\n%s is now a friend of %s!\n\n", G->userList[friendID]->name, G->userList[userID]->name);
+    printf("\n%s is now a friend of %s!\n", G->userList[friendID]->name, G->userList[userID]->name);
 }
 
 void RemoveFriend(Graph *G, int userID, int friendID)
 {
-    // User does not exist
-    if (G->userList[friendID] == NULL || friendID > G->maxUserID)
-    {
-        printf("\n\nUser with ID %d does not exist.\n\n", friendID);
-        return;
-    }
-
     if (friendID == userID)
     {
         printf("\n\nA user cannot be their own friend.\n\n");
@@ -220,13 +200,6 @@ void RemoveFriend(Graph *G, int userID, int friendID)
 
 void IsFriend(Graph *G, int idA, int idB)
 {
-    // Checking if friend actually exists
-    if (G->userList[idB] == NULL || idB > G->maxUserID)
-    {
-        printf("\n\nSuch a user does not exist and cannot be a friend of the user.\n\n");
-        return;
-    }
-
     if (idA == idB)
     {
         printf("\n\nA user cannot be their own friend.\n\n");
@@ -235,9 +208,9 @@ void IsFriend(Graph *G, int idA, int idB)
 
     // H_Search searches the hash table friendList for idB, and returns 1 if found and 0 if not found
     if (H_Search(G, idA, idB))
-        printf("\n\nUser with %s is a friend of %s.\n\n", G->userList[idA]->name, G->userList[idB]->name);
+        printf("\n%s is a friend of %s.\n", G->userList[idA]->name, G->userList[idB]->name);
     else
-        printf("\n\nUser with %s is not a friend of %s.\n\n", G->userList[idA]->name, G->userList[idB]->name);
+        printf("\n%s is not a friend of %s.\n", G->userList[idA]->name, G->userList[idB]->name);
 }
 
 // We perform BFS to find second friends, third friends and so on
@@ -331,6 +304,11 @@ end:
     printf("\n%d users added as friends of %s (ID %d).\n\n", count, G->userList[userID]->name, userID);
 
     DeleteQueue(Q);
+}
+
+void NewFriends(Graph *G, int userID)
+{
+
 }
 
 //-------------TO BE TAKEN CARE OF-------------//

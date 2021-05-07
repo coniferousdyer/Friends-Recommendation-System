@@ -49,6 +49,8 @@ void H_Delete_With_Text(Graph *G, int userID, int friendID)
     else
         previous->next = temp->next;
 
+    printf("\nYou have unfriended %s.\n\n", G->userList[friendID]->name);
+
     free(temp);
 }
 
