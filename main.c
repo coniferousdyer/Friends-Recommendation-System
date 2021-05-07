@@ -14,6 +14,7 @@ int main(void)
     PrintTitle();
 
 logout: // Whenever a user logs out or deletes their account
+    system("clear");
     PrintLoginMenu();
 
 retryLogin: // When login fails
@@ -22,15 +23,18 @@ retryLogin: // When login fails
 
     switch (option)
     {
-    case '1':                     // SIGN UP
+    case '1': // SIGN UP
+        system("clear");
         Signup(G, &currentID);    // Prompts user to sign up by entering details
         NewFriends(G, currentID); // Recommends new friends
         break;
-    case '2':                 // LOG IN
+    case '2': // LOG IN
+        system("clear");
         Login(G, &currentID); // Prompts user to log in with a valid ID
         break;
     case '3': // EXIT
     {
+        system("clear");
         printf("\nBye! Hope to see you back!\n\n");
         DeleteGraph(G); // Deleting memory malloced for graph
         exit(0);
@@ -47,6 +51,8 @@ retryLogin: // When login fails
 
     do // Enclosing main menu in an infinite do-while loop
     {
+        delay(2000);
+        system("clear");
         PrintMenu();
 
     retryMainMenu: // When main menu option choosing fails
@@ -131,6 +137,8 @@ retryLogin: // When login fails
             else
             {
                 int K;
+                printf("Enter number of recommendations you would like: ");
+                scanf("%d", &K);
                 RegFriends(G, currentID, K);
             }
         }
@@ -153,12 +161,13 @@ retryLogin: // When login fails
 
         case '7': // EXIT
         {
+            system("clear");
             printf("\nBye! Hope to see you back!\n\n");
             DeleteGraph(G); // Deleting memory malloced for graph
             exit(0);
         }
         break;
-        
+
         default:
         {
             printf("\nInvalid option entered. Please try again.\n");

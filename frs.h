@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include <time.h>
 #include "queue.h"
 
 // The information about each user is contained in a struct
@@ -54,5 +55,7 @@ void NewFriends(Graph *G, int userID);
 
 void DeleteFriendList(Graph *G, int userID); // To delete a user's friendList
 void DeleteGraph(Graph *G);                  // To delete the graph at the end of the program
+
+void delay(int number_of_seconds); // To cause a time delay, used for UI
 
 #endif
