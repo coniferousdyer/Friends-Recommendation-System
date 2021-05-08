@@ -47,3 +47,11 @@ Instead, we use separate chaining. Each element of the dynamic array is a bucket
 When we <strong>ADD A USER</strong>, we first check the minHeap to see if the ID of any previously deleted user is available or not. If heapSize = 0 (minHeap is empty), we assign the user ```G->maxUserID + 1``` as their ID. If not, we assign the user ```G->minHeap[0]```, the minimum ID in the heap. In this way, we guarantee that the user gets the minimum possible ID, while utilising left over space. An average of O(1) time is taken to add the user while O(log n) time is taken to maintain the heap property.
 
 When we <strong>DELETE A USER</strong>, we free the memory associated with the user and insert their ID into the minHeap, so that any future users can be assigned that ID. We also delete the user from the friendLists of all the other users who have added that user as a friend. Deletion takes O(1) time, insertion of ID into the minHeap takes O(log n) time and removal of user from friendList of all users (```removefriendofuser()```) takes at worst O(n) time.
+
+## <strong>Friends Recommendation</strong>
+
+
+
+
+
+

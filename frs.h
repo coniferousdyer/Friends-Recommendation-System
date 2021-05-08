@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "queue.h"
+#include "newuser.h"
 
 // The information about each user is contained in a struct
 typedef struct User
