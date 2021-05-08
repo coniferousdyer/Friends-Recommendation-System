@@ -6,12 +6,38 @@ int main(void)
 {
     Graph *G = CreateGraph();
 
+    // //------------TRIAL-------------//
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddFriend(G, 0, 1);
+    // AddFriend(G, 0, 2);
+    // AddFriend(G, 0, 3);
+    // AddFriend(G, 1, 7);
+    // AddFriend(G, 1, 8);
+    // AddFriend(G, 1, 2);
+    // AddFriend(G, 2, 6);
+    // AddFriend(G, 3, 5);
+    // AddFriend(G, 3, 4);
+    // AddFriend(G, 4, 9);
+    // AddFriend(G, 5, 9);
+    // //------------------------------//
+
     int currentID; // To store the ID of the currently logged in user
     char option;
 
     //-------------------LOGIN---------------------//
 
+    system("clear");
     PrintTitle();
+    delay(3000);
 
 logout: // Whenever a user logs out or deletes their account
     system("clear");
@@ -147,6 +173,7 @@ retryLogin: // When login fails
         case '5': // LOG OUT
         {
             printf("\nYou have been logged out.\n");
+            delay(2000);
             goto logout;
         }
         break;
@@ -155,6 +182,7 @@ retryLogin: // When login fails
         {
             RemoveUser(G, currentID);
             printf("\nAccount has been successfully deleted.\n");
+            delay(2000);
             goto logout;
         }
         break;

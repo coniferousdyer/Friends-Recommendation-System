@@ -229,7 +229,7 @@ void RegFriends(Graph *G, int userID, int K)
     QueuePtr Q = CreateQueue();
 
     // We subtract the number of friends of user from total number of users
-    int n = G->numUsers - G->userList[userID]->numFriends;
+    int n = G->numUsers - G->userList[userID]->numFriends - 1;
     K = (n <= K ? n : K);
 
     for (int i = 0; i < G->numUsers; i++)
@@ -249,36 +249,59 @@ void RegFriends(Graph *G, int userID, int K)
         }
     }
 
+    printf("ID\t|Name\t|Age\t|City\t|Number of Friends\n");
+    printf("------------------------------------------\n\n");
+
     while (!Empty(Q))
     {
         int u = Q->front->id; // u -> current node in queue
         Dequeue(Q);
 
-        for (int i = 0; i < G->userList[u]->bucketNo; i++)
+        for (int i = 0; i < G->userList[u]->bucketNo; i++) // Traversing through hash table
         {
             Node *temp = G->userList[u]->friendList[i];
 
-            while (temp != NULL)
+            while (temp != NULL) // Traversing through each linked list in hash table
             {
                 if (!visited[temp->id])
                 {
                     visited[temp->id] = true;
                     Enqueue(Q, temp->id);
-
-                    printf("%d\t%s\tAge %d\t%s\n%d friends\n",
-                           G->userList[u]->id,
-                           G->userList[u]->name,
-                           G->userList[u]->age,
-                           G->userList[u]->city,
-                           G->userList[u]->numFriends);
-
-                    --K;
-                    if (!K)       // We check if K = 0
-                        goto end; // If K = 0, then we terminate the process
-
-                    temp = temp->next;
                 }
+
+                temp = temp->next;
             }
+        }
+
+        // Checking if user with ID u is a friend of user
+        if (!H_Search(G, userID, u))
+        {
+            printf("%d\t|%s\t|Age %d\t|%s\t|%d friends\n",
+                   G->userList[u]->id,
+                   G->userList[u]->name,
+                   G->userList[u]->age,
+                   G->userList[u]->city,
+                   G->userList[u]->numFriends);
+
+            --K;
+            if (!K)       // We check if K = 0
+                goto end; // If K = 0, then we terminate the process
+        }
+    }
+
+    // To visit any leftover users if K != 0
+    for (int i = 0; i < G->numUsers && K > 0; i++)
+    {
+        if (!visited[i])
+        {
+            printf("%d\t|%s\t|Age %d\t|%s\t|%d friends\n",
+                   G->userList[i]->id,
+                   G->userList[i]->name,
+                   G->userList[i]->age,
+                   G->userList[i]->city,
+                   G->userList[i]->numFriends);
+
+            --K; // If K = 0, then we terminate the process
         }
     }
 
@@ -303,11 +326,15 @@ end:
 
     printf("\n%d users added as friends of %s (ID %d).\n\n", count, G->userList[userID]->name, userID);
 
+    char dispose; // To take the random character entered to end input
+    scanf("%c", &dispose);
+
     DeleteQueue(Q);
 }
 
 void NewFriends(Graph *G, int userID)
 {
+
 }
 
 /*
@@ -329,8 +356,5 @@ void delay(int number_of_seconds)
 
 //-------------TO BE TAKEN CARE OF-------------//
 
-// Check if friend is a user before searching/deleting. Let user try again?
-// Check for duplicates in user and friendlist
-// If searching for duplicates, display all?
-// Test RegFriends and all functionalities
-// In main.c, check if user exists before calling function (except for RegFriends, RemoveUser, AddUser)
+// Check if friend is already friend
+// Go back option in log in?

@@ -67,7 +67,7 @@ void Login(Graph *G, int *currentID)
 
 void Signup(Graph *G, int *currentID)
 {
-    printf("\nWelcome to Spacebook!\n");
+    printf("\nWelcome to Spacebook!\n\n");
 
     // Updating currentID to that of the added user
     if (G->heapSize == 0)
