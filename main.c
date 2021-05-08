@@ -43,7 +43,6 @@ logout: // Whenever a user logs out or deletes their account
     system("clear");
     PrintLoginMenu();
 
-retryLogin: // When login fails
     printf("\nEnter option (1 to signup, 2 to login, 3 to exit): ");
     scanf(" %c", &option);
 
@@ -69,7 +68,8 @@ retryLogin: // When login fails
     default:
     {
         printf("\nInvalid option entered. Please try again.\n");
-        goto retryLogin;
+        delay(2000);
+        goto logout; // Retry login
     }
     }
 
@@ -97,13 +97,15 @@ retryLogin: // When login fails
             if (G->userList[friendID] == NULL || friendID > G->maxUserID)
             {
                 printf("\n\nSuch a user does not exist and cannot be added as a friend.\n\n");
-                goto retryMainMenu; // Return to main menu
+                delay(2000);
+                continue; // Return to main menu
             }
 
             if (friendID == currentID)
             {
                 printf("\nA user cannot be their own friend.\n");
-                goto retryMainMenu; // Return to main menu
+                delay(2000);
+                continue; // Return to main menu
             }
 
             AddFriend(G, currentID, friendID);
@@ -120,7 +122,8 @@ retryLogin: // When login fails
             if (G->userList[friendID] == NULL || friendID > G->maxUserID)
             {
                 printf("\n\nUser with ID %d does not exist.\n\n", friendID);
-                goto retryMainMenu; // Return to main menu
+                delay(2000);
+                continue; // Return to main menu
             }
 
             RemoveFriend(G, currentID, friendID);
@@ -139,14 +142,16 @@ retryLogin: // When login fails
             if (G->userList[userID] == NULL || userID > G->maxUserID)
             {
                 printf("\n\nUser with ID %d does not exist.\n\n", friendID);
-                goto retryMainMenu; // Return to main menu
+                delay(2000);
+                continue; // Return to main menu
             }
 
             // Friend does not exist
             if (G->userList[friendID] == NULL || friendID > G->maxUserID)
             {
                 printf("\n\nUser with ID %d does not exist.\n\n", friendID);
-                goto retryMainMenu; // Return to main menu
+                delay(2000);
+                continue; // Return to main menu
             }
 
             IsFriend(G, userID, friendID);
@@ -199,7 +204,7 @@ retryLogin: // When login fails
         default:
         {
             printf("\nInvalid option entered. Please try again.\n");
-            goto retryMainMenu;
+            delay(2000);
         }
         }
     } while (true);
