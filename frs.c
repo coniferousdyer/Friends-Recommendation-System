@@ -266,8 +266,8 @@ void RegFriends(Graph *G, int userID, int K)
         }
     }
 
-    printf("ID\t|Name\t\t\t|Age\t|City\t\t\t|Number of Friends\n");
-    printf("--------------------------------------------------------------------------------------------------\n");
+    printf("ID\t|Name\t\t\t|Age\t|City\t\t\t|School\t\t\t|Number of Friends\n");
+    printf("------------------------------------------------------------------------------------------------------------------------\n");
 
     while (!Empty(Q))
     {
@@ -295,11 +295,14 @@ void RegFriends(Graph *G, int userID, int K)
         {
             printf("%d\t", G->userList[u]->id);
             printf("|%s\t\t", G->userList[u]->name);
-            if (strlen(G->userList[u]->name) < 8)
+            if (strlen(G->userList[u]->name) < 7)
                 printf("\t");
             printf("|Age %d\t", G->userList[u]->age);
             printf("|%s\t\t", G->userList[u]->city);
-            if (strlen(G->userList[u]->city) < 8)
+            if (strlen(G->userList[u]->city) < 7)
+                printf("\t");
+            printf("|%s\t\t", G->userList[u]->school);
+            if (strlen(G->userList[u]->school) < 7)
                 printf("\t");
             printf("|%d friends\n", G->userList[u]->numFriends);
 
@@ -316,11 +319,14 @@ void RegFriends(Graph *G, int userID, int K)
         {
             printf("%d\t", G->userList[i]->id);
             printf("|%s\t\t", G->userList[i]->name);
-            if (strlen(G->userList[i]->name) < 8)
+            if (strlen(G->userList[i]->name) < 7)
                 printf("\t");
             printf("|Age %d\t", G->userList[i]->age);
             printf("|%s\t\t", G->userList[i]->city);
-            if (strlen(G->userList[i]->city) < 8)
+            if (strlen(G->userList[i]->city) < 7)
+                printf("\t");
+            printf("|%s\t\t", G->userList[i]->school);
+            if (strlen(G->userList[i]->school) < 7)
                 printf("\t");
             printf("|%d friends\n", G->userList[i]->numFriends);
 
@@ -365,19 +371,22 @@ void NewFriends(Graph *G, int newUserID)
 {
     if (G->numUsers <= 11)
     {
-        printf("ID\t|Name\t\t\t|Age\t|City\t\t\t|Number of Friends\n");
-        printf("--------------------------------------------------------------------------------------------------\n");
+        printf("ID\t|Name\t\t\t|Age\t|City\t\t\t|School\t\t\t|Number of Friends\n");
+        printf("------------------------------------------------------------------------------------------------------------------------\n");
         for (int i = 0; i < G->maxUserID; i++)
         {
             if (G->userList[i] != NULL && i != newUserID)
             {
                 printf("%d\t", G->userList[i]->id);
                 printf("|%s\t\t", G->userList[i]->name);
-                if (strlen(G->userList[i]->name) < 8)
+                if (strlen(G->userList[i]->name) < 7)
                     printf("\t");
                 printf("|Age %d\t", G->userList[i]->age);
                 printf("|%s\t\t", G->userList[i]->city);
-                if (strlen(G->userList[i]->city) < 8)
+                if (strlen(G->userList[i]->city) < 7)
+                    printf("\t");
+                printf("|%s\t\t", G->userList[i]->school);
+                if (strlen(G->userList[i]->school) < 7)
                     printf("\t");
                 printf("|%d friends\n", G->userList[i]->numFriends);
             }
@@ -422,8 +431,8 @@ void NewFriends(Graph *G, int newUserID)
                 MH_Insert(maxHeap, &maxHeapSize, school[i], count[school[i]]); // Insert into maxHeap
         }
 
-        printf("ID\t|Name\t\t\t|Age\t|City\t\t\t|Number of Friends\n");
-        printf("--------------------------------------------------------------------------------------------------\n");
+        printf("ID\t|Name\t\t\t|Age\t|City\t\t\t|School\t\t\t|Number of Friends\n");
+        printf("------------------------------------------------------------------------------------------------------------------------\n");
 
         while (cnt < 10 && maxHeapSize > 0)
         {
@@ -436,11 +445,14 @@ void NewFriends(Graph *G, int newUserID)
             {
                 printf("%d\t", G->userList[maxIndex]->id);
                 printf("|%s\t\t", G->userList[maxIndex]->name);
-                if (strlen(G->userList[maxIndex]->name) < 8)
+                if (strlen(G->userList[maxIndex]->name) < 7)
                     printf("\t");
                 printf("|Age %d\t", G->userList[maxIndex]->age);
                 printf("|%s\t\t", G->userList[maxIndex]->city);
-                if (strlen(G->userList[maxIndex]->city) < 8)
+                if (strlen(G->userList[maxIndex]->city) < 7)
+                    printf("\t");
+                printf("|%s\t\t", G->userList[maxIndex]->school);
+                if (strlen(G->userList[maxIndex]->school) < 7)
                     printf("\t");
                 printf("|%d friends\n", G->userList[maxIndex]->numFriends);
 
@@ -459,11 +471,14 @@ void NewFriends(Graph *G, int newUserID)
             {
                 printf("%d\t", G->userList[i]->id);
                 printf("|%s\t\t", G->userList[i]->name);
-                if (strlen(G->userList[i]->name) < 8)
+                if (strlen(G->userList[i]->name) < 7)
                     printf("\t");
                 printf("|Age %d\t", G->userList[i]->age);
                 printf("|%s\t\t", G->userList[i]->city);
-                if (strlen(G->userList[i]->city) < 8)
+                if (strlen(G->userList[i]->city) < 7)
+                    printf("\t");
+                printf("|%s\t\t", G->userList[i]->school);
+                if (strlen(G->userList[i]->school) < 7)
                     printf("\t");
                 printf("|%d friends\n", G->userList[i]->numFriends);
 
@@ -479,11 +494,14 @@ void NewFriends(Graph *G, int newUserID)
             {
                 printf("%d\t", G->userList[nU - 1 - i]->id);
                 printf("|%s\t\t", G->userList[nU - 1 - i]->name);
-                if (strlen(G->userList[nU - 1 - i]->name) < 8)
+                if (strlen(G->userList[nU - 1 - i]->name) < 7)
                     printf("\t");
                 printf("|Age %d\t", G->userList[nU - 1 - i]->age);
                 printf("|%s\t\t", G->userList[nU - 1 - i]->city);
-                if (strlen(G->userList[nU - 1 - i]->city) < 8)
+                if (strlen(G->userList[nU - 1 - i]->city) < 7)
+                    printf("\t");
+                printf("|%s\t\t", G->userList[nU - 1 - i]->school);
+                if (strlen(G->userList[nU - 1 - i]->school) < 7)
                     printf("\t");
                 printf("|%d friends\n", G->userList[nU - 1 - i]->numFriends);
 

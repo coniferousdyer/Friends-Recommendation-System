@@ -7,27 +7,28 @@ int main(void)
     Graph *G = CreateGraph();
 
     // //------------TRIAL-------------//
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddFriend(G, 0, 1);
-    // AddFriend(G, 0, 2);
-    // AddFriend(G, 0, 3);
-    // AddFriend(G, 1, 7);
-    // AddFriend(G, 1, 8);
-    // AddFriend(G, 1, 2);
-    // AddFriend(G, 2, 6);
-    // AddFriend(G, 3, 5);
-    // AddFriend(G, 3, 4);
-    // AddFriend(G, 4, 9);
-    // AddFriend(G, 5, 9);
+    AddUser(G);
+    AddUser(G);
+    AddUser(G);
+    AddUser(G);
+    AddUser(G);
+    AddUser(G);
+    AddUser(G);
+    AddUser(G);
+    AddUser(G);
+    AddUser(G);
+    AddUser(G); //
+    AddFriend(G, 0, 1);
+    AddFriend(G, 0, 2);
+    AddFriend(G, 0, 3);
+    AddFriend(G, 1, 7);
+    AddFriend(G, 1, 8);
+    AddFriend(G, 1, 2);
+    AddFriend(G, 2, 6);
+    AddFriend(G, 3, 5);
+    AddFriend(G, 3, 4);
+    AddFriend(G, 4, 9);
+    AddFriend(G, 5, 9);
     // //------------------------------//
 
     int currentID; // To store the ID of the currently logged in user
