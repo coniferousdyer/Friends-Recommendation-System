@@ -50,8 +50,14 @@ logout: // Whenever a user logs out or deletes their account
     {
     case '1': // SIGN UP
         system("clear");
-        Signup(G, &currentID);    // Prompts user to sign up by entering details
-        NewFriends(G, currentID); // Recommends new friends
+        Signup(G, &currentID); // Prompts user to sign up by entering details
+
+        if (G->numUsers > 1) // If the only user is the new user, then there is no one to recommend
+        {
+            printf("Would you like to make some friends? Here are some recommendations: \n\n");
+            NewFriends(G, currentID); // Recommends new friends
+        }
+
         break;
     case '2': // LOG IN
         system("clear");

@@ -1,8 +1,8 @@
-#include "newuser.h"
+#include "frs.h"
 
 //-------------Linked List functions-------------//
 
-Node *CreateNode()
+Node *CreateLLNode()
 {
     Node *newNode = (Node *)malloc(sizeof(Node));
     newNode->next = NULL;
@@ -12,7 +12,7 @@ Node *CreateNode()
 
 Node *SLL_Insert(Node *head, int n)
 {
-    Node *newHead = CreateNode();
+    Node *newHead = CreateLLNode();
 
     newHead->next = head;
     newHead->id = n;
@@ -75,7 +75,6 @@ void DeleteIHT(IntHashtable *I)
     for (int i = 0; i < 100; i++)
        DeleteSLL(I->array[i]);
 
-    free(I->array);
     free(I);
 }
 
@@ -93,17 +92,16 @@ void IHT_Delete(Graph *G, IntHashtable *I, int id)
     I->array[i] = SLL_Delete(I->array[i], id);
 }
 
-void IHT_Traverse(Graph *G, IntHashtable *I, int A[], int age)
+void IHT_Traverse(Graph *G, IntHashtable *I, int A[], int *n, int age)
 {
     Node *temp = I->array[age];
-    int i = 0;
 
     while (temp != NULL)
     {
-        if (temp->id == age)
+        if (G->userList[temp->id]->age == age)
         {
-            A[i] = temp->id;
-            ++i;
+            A[*n] = temp->id;
+            ++(*n);
         }
 
         temp = temp->next;
@@ -131,11 +129,8 @@ void DeleteStringHashtable(StringHashtable *S)
     {
         for (int j = 0; j < 26; j++)
             DeleteSLL(S->grid[i][j]); // Deleting each linked list
-
-        free(S->grid[i]); // Freeing each row of 2D matrix
     }
 
-    free(S->grid); // Freeing whole matrix
     free(S);       // Freeing StringHashtable
 }
 
@@ -155,20 +150,19 @@ void SHTCity_Delete(Graph *G, StringHashtable *S, int id)
     S->grid[i][j] = SLL_Delete(S->grid[i][j], id);
 }
 
-void SHTCity_Traverse(Graph *G, StringHashtable *S, int A[], char city[])
+void SHTCity_Traverse(Graph *G, StringHashtable *S, int A[], int *n, char city[])
 {
     int i = strlen(city) - 1; // Checking length of city of user ID
     int j = city[0] - 'A';    // Checking first letter of city of user ID
 
     Node *temp = S->grid[i][j];
-    int i = 0;
 
     while (temp != NULL) // Traverses through linked list at grid[i][j]
     {
         if (strcmp(G->userList[temp->id]->city, city) == 0)
         {
-            A[i] = temp->id; // Storing IDs of users who are from city
-            ++i;
+            A[*n] = temp->id; // Storing IDs of users who are from city
+            ++(*n);
         }
 
         temp = temp->next;
@@ -193,24 +187,21 @@ void SHTSchool_Delete(Graph *G, StringHashtable *S, int id)
     S->grid[i][j] = SLL_Delete(S->grid[i][j], id);
 }
 
-void SHTSchool_Traverse(Graph *G, StringHashtable *S, int A[], char school[])
+void SHTSchool_Traverse(Graph *G, StringHashtable *S, int A[], int *n, char school[])
 {
     int i = strlen(school) - 1; // Checking length of city of user ID
     int j = school[0] - 'A';    // Checking first letter of city of user ID
 
     Node *temp = S->grid[i][j];
-    int i = 0;
 
     while (temp != NULL) // Traverses through linked list at grid[i][j]
     {
         if (strcmp(G->userList[temp->id]->school, school) == 0)
         {
-            A[i] = temp->id; // Storing IDs of users who are from city
-            ++i;
+            A[*n] = temp->id; // Storing IDs of users who are from city
+            ++(*n);
         }
 
         temp = temp->next;
     }
 }
-
-//-------------Friends Recommendation Functions-------------//

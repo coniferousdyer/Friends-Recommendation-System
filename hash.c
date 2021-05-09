@@ -17,6 +17,8 @@ void H_Insert(Graph *G, int userID, int friendID)
         newNode->next = temp->next;
         temp->next = newNode;
     }
+
+    ++(G->userList[userID]->numFriends); // Incrementing number of friends of user
 }
 
 void H_Delete_With_Text(Graph *G, int userID, int friendID)
@@ -51,6 +53,8 @@ void H_Delete_With_Text(Graph *G, int userID, int friendID)
 
     printf("\nYou have unfriended %s.\n\n", G->userList[friendID]->name);
 
+    --(G->userList[userID]->numFriends); // Decrementing number of friends of user
+
     free(temp);
 }
 
@@ -77,6 +81,8 @@ void H_Delete_Without_Text(Graph *G, int userID, int friendID)
         G->userList[userID]->friendList[pos] = temp->next;
     else
         previous->next = temp->next;
+
+    --(G->userList[userID]->numFriends); // Decrementing number of friends of user
 
     free(temp);
 }
