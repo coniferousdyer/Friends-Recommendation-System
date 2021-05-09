@@ -50,6 +50,21 @@ When we <strong>DELETE A USER</strong>, we free the memory associated with the u
 
 ## <strong>Friends Recommendation</strong>
 
+There are two different recommendation algorithms we have used here:
+
+1. For already existing users (those who have friends)
+2. For newly registered users (those with no friends)
+
+<br>
+
+For <strong>EXISTING USERS</strong> with friends, our algorithm is based on recommending friends of friends of the user, friends of those friends and so on. In order to achieve this in the fastest time possible, we perform <strong>Breadth-First Traversal</strong> starting from the user. We have implemented a queue which stores the user IDs for this purpose. We start with the user and their friends by enqueueing them, but we do not count them. Instead, we traverse through their friends, the friends of their friends and so on. The user is thus recommended new friends in this way.
+
+For <strong>NEW USERS</strong> without friends, our algorithm is based on <strong>grouping users with common parameters together</strong>. We use the idea of hash tables to divide users into buckets and access them quicker. We have an integer hash table (IntHashtable) for age, and 2 string hash table (StringHashtable) for city and school. 
+
+* IntHashtable consists of a 1D array of linked lists. The linked list at the i-th position contains the IDs of users for which i = age % 100. 
+
+* StringHashtable consists of a 2D array of linked lists. The linked list at i, j contains the strings of length i + 1 and starting with the j-th letter of the alphabet.
+
 
 
 
