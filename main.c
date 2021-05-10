@@ -6,31 +6,6 @@ int main(void)
 {
     Graph *G = CreateGraph();
 
-    // //------------TRIAL-------------//
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G);
-    // AddUser(G); //
-    // AddFriend(G, 0, 1);
-    // AddFriend(G, 0, 2);
-    // AddFriend(G, 0, 3);
-    // AddFriend(G, 1, 7);
-    // AddFriend(G, 1, 8);
-    // AddFriend(G, 1, 2);
-    // AddFriend(G, 2, 6);
-    // AddFriend(G, 3, 5);
-    // AddFriend(G, 3, 4);
-    // AddFriend(G, 4, 9);
-    // AddFriend(G, 5, 9);
-    // //------------------------------//
-
     int currentID; // To store the ID of the currently logged in user
     char option;
 
@@ -224,23 +199,3 @@ logout: // Whenever a user logs out or deletes their account
 
     return 0;
 }
-
-// H_Insert works
-// H_Delete works
-// H_Search works
-// H_Rehash works
-// DeleteGraph works
-// DeleteFriendList works
-// CreateGraph works
-// CreateUser works
-// CreateFriendList works
-// CreateUserList works
-// AddUser works
-// RemoveUser works
-// AddFriend works
-// IsFriend works
-// RemoveFriend works
-// RemoveFriendFromUser works
-
-// RegFriends
-// NewFriends

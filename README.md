@@ -129,5 +129,7 @@ When the program starts, you will be greeted by the title of the social network,
 
 i.e. Whenever you want to stop adding friends, you can enter a character other than an integer.
 
+<strong>Thank you!</strong>
+
 
 
