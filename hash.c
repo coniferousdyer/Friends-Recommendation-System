@@ -3,23 +3,26 @@
 
 void H_Insert(Graph *G, int userID, int friendID)
 {
+    // User does not exist
     if (G->userList[userID] == NULL || userID > G->maxUserID || userID < 0)
     {
         printf("\n\nUser with ID %d does not exist.\n\n", userID);
         return;
     }
 
+    // Friend does not exist
     if (G->userList[friendID] == NULL || friendID > G->maxUserID || friendID < 0)
     {
         printf("\n\nUser with ID %d does not exist.\n\n", friendID);
         return;
     }
 
+    // Points to friendList of corresponding user at userList[pos]
     int pos = friendID % G->userList[userID]->bucketNo;
 
     Node *temp = G->userList[userID]->friendList[pos], *newNode;
 
-    newNode = CreateNode();
+    newNode = CreateNode(); // malloc-ing a new node
     newNode->id = friendID;
 
     if (temp == NULL)
@@ -33,14 +36,17 @@ void H_Insert(Graph *G, int userID, int friendID)
     ++(G->userList[userID]->numFriends); // Incrementing number of friends of user
 }
 
+// Prints useful messages to analyse the reason for failure of function
 void H_Delete_With_Text(Graph *G, int userID, int friendID)
 {
+    // User does not exist
     if (G->userList[userID] == NULL || userID > G->maxUserID || userID < 0)
     {
         printf("\n\nUser with ID %d does not exist.\n\n", userID);
         return;
     }
 
+    // Friend does not exist
     if (G->userList[friendID] == NULL || friendID > G->maxUserID || friendID < 0)
     {
         printf("\n\nUser with ID %d does not exist.\n\n", friendID);
@@ -49,6 +55,7 @@ void H_Delete_With_Text(Graph *G, int userID, int friendID)
 
     int pos = friendID % G->userList[userID]->bucketNo;
 
+    // Points to corresponding bucket number of friendList of userID
     Node *temp = G->userList[userID]->friendList[pos];
 
     if (temp == NULL)
@@ -58,7 +65,7 @@ void H_Delete_With_Text(Graph *G, int userID, int friendID)
     }
 
     Node *previous = NULL;
-    while (temp != NULL && temp->id != friendID)
+    while (temp != NULL && temp->id != friendID) // Iterating through linked list
     {
         previous = temp;
         temp = temp->next;
@@ -82,14 +89,18 @@ void H_Delete_With_Text(Graph *G, int userID, int friendID)
     free(temp);
 }
 
+// Does not print any messages even after failing. Required in places where text could mess up the UI
 void H_Delete_Without_Text(Graph *G, int userID, int friendID)
 {
+    // User does not exist
     if (G->userList[userID] == NULL || userID > G->maxUserID || userID < 0)
         return;
 
+    // Friend does not exist
     if (G->userList[friendID] == NULL || friendID > G->maxUserID || friendID < 0)
         return;
 
+    // Points to corresponding bucket number of friendList of userID
     int pos = friendID % G->userList[userID]->bucketNo;
 
     Node *temp = G->userList[userID]->friendList[pos];
@@ -117,11 +128,14 @@ void H_Delete_Without_Text(Graph *G, int userID, int friendID)
     free(temp);
 }
 
+// Searches for the friendID in friendList of the user and returns 1 if found, else 0
 bool H_Search(Graph *G, int userID, int friendID)
 {
+    // Points to corresponding bucket number of friendList of userID
     int pos = friendID % G->userList[userID]->bucketNo;
     bool found = false;
 
+    // User does not exist (we check for a negative friendID which is impossible)
     if (pos < 0)
         return false;
 

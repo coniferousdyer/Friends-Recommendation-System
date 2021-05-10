@@ -87,6 +87,22 @@ The time complexity of this algorithm is ```O(nA + nC + nS)```, which is linear,
 
 <br>
 
+# Data Structures Used
+
+* Graphs
+
+* Arrays (1D and 2D arrays)
+
+* Heaps (MinHeap, MaxHeap and Priority Queue) 
+
+* Queues
+
+* Hash Tables
+
+* Singly Linked Lists
+
+<br>
+
 # Division of Tasks
 
 * <strong>KONDURU NITHIN</strong> - RemoveUser(), NewFriends() algorithm - Grouping

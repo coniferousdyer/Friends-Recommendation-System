@@ -29,6 +29,7 @@ void MinHeapify(int A[], int heapSize, int i)
     }
 }
 
+// Deletes from minHeap and decrements heapSize
 void Delete(int A[], int *heapSize)
 {
     --(*heapSize);
@@ -40,6 +41,7 @@ void Delete(int A[], int *heapSize)
     MinHeapify(A, *heapSize, 0);
 }
 
+// Inserts into minHeap and increments heapSize
 void Insert(int A[], int *heapSize, int elem)
 {
     ++(*heapSize);
@@ -53,7 +55,7 @@ void Insert(int A[], int *heapSize, int elem)
     }
 }
 
-//-------------------MAX HEAP---------------------//
+//-------------------MAX HEAP/PRIORITY QUEUE---------------------//
 
 void MaxHeapify(pair A[], int heapSize, int i)
 {
@@ -73,6 +75,7 @@ void MaxHeapify(pair A[], int heapSize, int i)
     }
 }
 
+// Deletes from maxHeap and decrements heapSize
 void MH_Delete(pair A[], int *heapSize)
 {
     --(*heapSize);
@@ -82,6 +85,7 @@ void MH_Delete(pair A[], int *heapSize)
     MaxHeapify(A, *heapSize, 0);
 }
 
+// Inserts into maxHeap and increments heapSize
 void MH_Insert(pair A[], int *heapSize, int elem1, short int elem2)
 {
     ++(*heapSize);

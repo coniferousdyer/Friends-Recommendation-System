@@ -27,6 +27,7 @@ void PrintMenu()
     printf("|________________________________________|\n\n");
 }
 
+// Prints a neat login menu
 void PrintLoginMenu()
 {
     printf(" ________________________________________\n");
@@ -37,6 +38,7 @@ void PrintLoginMenu()
     printf("|________________________________________|\n\n");
 }
 
+// Prompts user to enter name and ID to login
 void Login(Graph *G, int *currentID)
 {
     char name[20];
@@ -67,6 +69,7 @@ void Login(Graph *G, int *currentID)
     }
 }
 
+// Prompts the user to enter details to signup
 void Signup(Graph *G, int *currentID)
 {
     printf("\nWelcome to Spacebook!\n\n");

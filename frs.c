@@ -337,7 +337,7 @@ void RegFriends(Graph *G, int userID, int K)
             }
         }
 
-        // Checking if user with ID u is a friend of user
+        // Checking if user with ID u is a friend of user and printing
         if (!H_Search(G, userID, u))
         {
             printf("%d\t", G->userList[u]->id);
@@ -514,7 +514,7 @@ void NewFriends(Graph *G, int newUserID)
             int maxIndex = maxHeap[0].index;
             MH_Delete(maxHeap, &maxHeapSize);
 
-            // Checking if index has been included already or is equal to newUserID
+            // Checking if index has been included already or is equal to newUserID and printing
             if (count[maxIndex] > 0 && G->userList[maxIndex] != NULL && maxIndex != newUserID)
             {
                 printf("%d\t", G->userList[maxIndex]->id);
