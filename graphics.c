@@ -51,7 +51,7 @@ void Login(Graph *G, int *currentID)
         scanf("%d", currentID);
 
         // Tocheck if user is present in graph
-        if (G->userList[*currentID] != NULL && *currentID <= G->maxUserID)
+        if (G->userList[*currentID] != NULL && *currentID <= G->maxUserID && *currentID >= 0)
         {
             // To check if name matches ID
             if (strcmp(name, G->userList[*currentID]->name)== 0)
@@ -62,6 +62,8 @@ void Login(Graph *G, int *currentID)
         }
 
         printf("\nUnsuccessful login. Please enter the correct credentials.\n\n");
+        delay(2000);
+        system("clear");
     }
 }
 

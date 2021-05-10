@@ -3,6 +3,18 @@
 
 void H_Insert(Graph *G, int userID, int friendID)
 {
+    if (G->userList[userID] == NULL || userID > G->maxUserID || userID < 0)
+    {
+        printf("\n\nUser with ID %d does not exist.\n\n", userID);
+        return;
+    }
+
+    if (G->userList[friendID] == NULL || friendID > G->maxUserID || friendID < 0)
+    {
+        printf("\n\nUser with ID %d does not exist.\n\n", friendID);
+        return;
+    }
+
     int pos = friendID % G->userList[userID]->bucketNo;
 
     Node *temp = G->userList[userID]->friendList[pos], *newNode;
@@ -23,6 +35,18 @@ void H_Insert(Graph *G, int userID, int friendID)
 
 void H_Delete_With_Text(Graph *G, int userID, int friendID)
 {
+    if (G->userList[userID] == NULL || userID > G->maxUserID || userID < 0)
+    {
+        printf("\n\nUser with ID %d does not exist.\n\n", userID);
+        return;
+    }
+
+    if (G->userList[friendID] == NULL || friendID > G->maxUserID || friendID < 0)
+    {
+        printf("\n\nUser with ID %d does not exist.\n\n", friendID);
+        return;
+    }
+
     int pos = friendID % G->userList[userID]->bucketNo;
 
     Node *temp = G->userList[userID]->friendList[pos];
@@ -60,6 +84,12 @@ void H_Delete_With_Text(Graph *G, int userID, int friendID)
 
 void H_Delete_Without_Text(Graph *G, int userID, int friendID)
 {
+    if (G->userList[userID] == NULL || userID > G->maxUserID || userID < 0)
+        return;
+
+    if (G->userList[friendID] == NULL || friendID > G->maxUserID || friendID < 0)
+        return;
+
     int pos = friendID % G->userList[userID]->bucketNo;
 
     Node *temp = G->userList[userID]->friendList[pos];
@@ -91,6 +121,9 @@ bool H_Search(Graph *G, int userID, int friendID)
 {
     int pos = friendID % G->userList[userID]->bucketNo;
     bool found = false;
+
+    if (pos < 0)
+        return false;
 
     Node *temp = G->userList[userID]->friendList[pos];
 

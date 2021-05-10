@@ -7,28 +7,28 @@ int main(void)
     Graph *G = CreateGraph();
 
     // //------------TRIAL-------------//
-    AddUser(G);
-    AddUser(G);
-    AddUser(G);
-    AddUser(G);
-    AddUser(G);
-    AddUser(G);
-    AddUser(G);
-    AddUser(G);
-    AddUser(G);
-    AddUser(G);
-    AddUser(G); //
-    AddFriend(G, 0, 1);
-    AddFriend(G, 0, 2);
-    AddFriend(G, 0, 3);
-    AddFriend(G, 1, 7);
-    AddFriend(G, 1, 8);
-    AddFriend(G, 1, 2);
-    AddFriend(G, 2, 6);
-    AddFriend(G, 3, 5);
-    AddFriend(G, 3, 4);
-    AddFriend(G, 4, 9);
-    AddFriend(G, 5, 9);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G);
+    // AddUser(G); //
+    // AddFriend(G, 0, 1);
+    // AddFriend(G, 0, 2);
+    // AddFriend(G, 0, 3);
+    // AddFriend(G, 1, 7);
+    // AddFriend(G, 1, 8);
+    // AddFriend(G, 1, 2);
+    // AddFriend(G, 2, 6);
+    // AddFriend(G, 3, 5);
+    // AddFriend(G, 3, 4);
+    // AddFriend(G, 4, 9);
+    // AddFriend(G, 5, 9);
     // //------------------------------//
 
     int currentID; // To store the ID of the currently logged in user
@@ -167,6 +167,12 @@ logout: // Whenever a user logs out or deletes their account
 
         case '4': // RECOMMEND FRIENDS
         {
+            if (G->numUsers == 1)
+            {
+                printf("\n\nThere are no other users registered. Sorry!\n\n");
+                break;
+            }
+
             // If user has no friends, then we recommend new friends based on our algorithm
             // Else we recommend them based on friends on friends
 

@@ -84,9 +84,9 @@ void DeleteGraph(Graph *G)
         }
     }
 
-    DeleteIHT(G->Age);                //
-    DeleteStringHashtable(G->City);   //
-    DeleteStringHashtable(G->School); //
+    DeleteIHT(G->Age);                // Deleting integer hash table Age
+    DeleteStringHashtable(G->City);   // Deleting string hash table City
+    DeleteStringHashtable(G->School); // Deleting string hash table School
     free(G->minHeap);
     free(G->userList);
     free(G);
@@ -138,9 +138,9 @@ void AddUser(Graph *G)
             G->userList[i] = NULL;
     }
 
-    IHT_Insert(G, G->Age, U->id);          //
-    SHTCity_Insert(G, G->City, U->id);     //
-    SHTSchool_Insert(G, G->School, U->id); //
+    IHT_Insert(G, G->Age, U->id);          // Storing new user in corresponding group as users of same age
+    SHTCity_Insert(G, G->City, U->id);     // Storing new user in corresponding group as users from same city
+    SHTSchool_Insert(G, G->School, U->id); // Storing new user in corresponding group as users from same school
 
     printf("\nYou have been successfully registered with ID %d!\n\n", U->id);
 }
@@ -148,7 +148,7 @@ void AddUser(Graph *G)
 void RemoveUser(Graph *G, int id)
 {
     // User does not exist
-    if (G->userList[id] == NULL || id > G->maxUserID)
+    if (G->userList[id] == NULL || id > G->maxUserID || id < 0)
     {
         printf("\n\nUser with ID %d does not exist.\n\n", id);
         return;
@@ -164,9 +164,9 @@ void RemoveUser(Graph *G, int id)
     if (((G->heapSize) & (G->heapSize - 1) == 0) && (G->heapSize != 1))
         G->minHeap = realloc(G->minHeap, 2 * G->heapSize);
 
-    IHT_Delete(G, G->Age, id);          //
-    SHTCity_Delete(G, G->City, id);     //
-    SHTSchool_Delete(G, G->School, id); //
+    IHT_Delete(G, G->Age, id);          // Deleting users from the age group they are in
+    SHTCity_Delete(G, G->City, id);     // Deleting users from the city group they are in
+    SHTSchool_Delete(G, G->School, id); // Deleting users from the school group they are in
 
     DeleteFriendList(G, id);
     free(G->userList[id]->friendList);
@@ -176,17 +176,33 @@ void RemoveUser(Graph *G, int id)
 
 void removefriendofuser(Graph *G, int num)
 {
+    // Iterating through userList
     for (int i = 0; i <= G->maxUserID; i++)
     {
         if (G->userList[i] == NULL || i == num)
             continue;
 
+        // Deleting userID num from friendList of user with ID i
         H_Delete_Without_Text(G, i, num);
     }
 }
 
 void AddFriend(Graph *G, int userID, int friendID)
 {
+    // User does not exist
+    if (G->userList[userID] == NULL || userID > G->maxUserID || userID < 0)
+    {
+        printf("\n\nUser with ID %d does not exist.\n\n", userID);
+        return;
+    }
+
+    // Friend does not exist
+    if (G->userList[friendID] == NULL || friendID > G->maxUserID || friendID < 0)
+    {
+        printf("\n\nUser with ID %d does not exist.\n\n", friendID);
+        return;
+    }
+
     if (H_Search(G, userID, friendID))
     {
         printf("\n\n%s is already a friend of %s.\n\n", G->userList[friendID]->name, G->userList[userID]->name);
@@ -211,6 +227,20 @@ void RemoveFriend(Graph *G, int userID, int friendID)
         return;
     }
 
+    // User does not exist
+    if (G->userList[userID] == NULL || userID > G->maxUserID || userID < 0)
+    {
+        printf("\n\nUser with ID %d does not exist.\n\n", userID);
+        return;
+    }
+
+    // Friend does not exist
+    if (G->userList[friendID] == NULL || friendID > G->maxUserID || friendID < 0)
+    {
+        printf("\n\nUser with ID %d does not exist.\n\n", friendID);
+        return;
+    }
+
     // Calling H_Delete_With_Text which deleted friend from friendList using hashing
     H_Delete_With_Text(G, userID, friendID);
 }
@@ -220,6 +250,20 @@ void IsFriend(Graph *G, int idA, int idB)
     if (idA == idB)
     {
         printf("\n\nA user cannot be their own friend.\n\n");
+        return;
+    }
+
+    // User does not exist
+    if (G->userList[idA] == NULL || idA > G->maxUserID || idA < 0)
+    {
+        printf("\n\nUser with ID %d does not exist.\n\n", idA);
+        return;
+    }
+
+    // Friend does not exist
+    if (G->userList[idB] == NULL || idB > G->maxUserID || idB < 0)
+    {
+        printf("\n\nUser with ID %d does not exist.\n\n", idB);
         return;
     }
 
@@ -234,7 +278,7 @@ void IsFriend(Graph *G, int idA, int idB)
 void RegFriends(Graph *G, int userID, int K)
 {
     // User does not exist
-    if (G->userList[userID] == NULL || userID > G->maxUserID)
+    if (G->userList[userID] == NULL || userID > G->maxUserID || userID < 0)
     {
         printf("\n\nUser with ID %d does not exist.\n\n", userID);
         return;
@@ -248,6 +292,9 @@ void RegFriends(Graph *G, int userID, int K)
     // We subtract the number of friends of user from total number of users
     int n = G->numUsers - G->userList[userID]->numFriends - 1;
     K = (n <= K ? n : K);
+
+    int recFriends[K + 2]; // To store recommended users
+    int recFC = 0;         // Iterator through reFriends
 
     for (int i = 0; i < G->numUsers; i++)
         visited[i] = false;
@@ -297,7 +344,7 @@ void RegFriends(Graph *G, int userID, int K)
             printf("|%s\t\t", G->userList[u]->name);
             if (strlen(G->userList[u]->name) < 7)
                 printf("\t");
-            printf("|Age %d\t", G->userList[u]->age);
+            printf("|%d\t", G->userList[u]->age);
             printf("|%s\t\t", G->userList[u]->city);
             if (strlen(G->userList[u]->city) < 7)
                 printf("\t");
@@ -305,6 +352,9 @@ void RegFriends(Graph *G, int userID, int K)
             if (strlen(G->userList[u]->school) < 7)
                 printf("\t");
             printf("|%d friends\n", G->userList[u]->numFriends);
+
+            recFriends[recFC] = u;
+            ++recFC;
 
             --K;
             if (!K)       // We check if K = 0
@@ -321,7 +371,7 @@ void RegFriends(Graph *G, int userID, int K)
             printf("|%s\t\t", G->userList[i]->name);
             if (strlen(G->userList[i]->name) < 7)
                 printf("\t");
-            printf("|Age %d\t", G->userList[i]->age);
+            printf("|%d\t", G->userList[i]->age);
             printf("|%s\t\t", G->userList[i]->city);
             if (strlen(G->userList[i]->city) < 7)
                 printf("\t");
@@ -330,6 +380,9 @@ void RegFriends(Graph *G, int userID, int K)
                 printf("\t");
             printf("|%d friends\n", G->userList[i]->numFriends);
 
+            recFriends[recFC] = i;
+            ++recFC;
+
             --K; // If K = 0, then we terminate the process
         }
     }
@@ -337,13 +390,14 @@ void RegFriends(Graph *G, int userID, int K)
 end:
     printf("\n");
 
+    // Allowing user to choose and add friends
     printf("Enter IDs of users from above whom you would like to add as friends (press any character to stop): ");
 
     int friendID, count = 0;
 
     while (scanf("%d", &friendID) > 0)
     {
-        if (G->userList[friendID] == NULL || friendID > G->maxUserID)
+        if (G->userList[friendID] == NULL || friendID > G->maxUserID || friendID < 0)
         {
             printf("\nUser with ID %d does not exist.\n", friendID);
             continue;
@@ -352,6 +406,17 @@ end:
         if (H_Search(G, userID, friendID))
         {
             printf("\n%s is already a friend of %s.\n", G->userList[friendID]->name, G->userList[userID]->name);
+            continue;
+        }
+
+        int i;
+        for (i = 0; i < K; i++)
+            if (friendID == recFriends[i])
+                break;
+
+        if (i == K)
+        {
+            printf("\nUser with ID %d was not among those recommended.\n", friendID);
             continue;
         }
 
@@ -369,6 +434,12 @@ end:
 
 void NewFriends(Graph *G, int newUserID)
 {
+    int recFriends[12]; // To store recommended friends
+    int recFC = 0;
+
+    for (int i = 0; i < 12; i++)
+        recFriends[i] = -1;
+
     if (G->numUsers <= 11)
     {
         printf("ID\t|Name\t\t\t|Age\t|City\t\t\t|School\t\t\t|Number of Friends\n");
@@ -381,7 +452,7 @@ void NewFriends(Graph *G, int newUserID)
                 printf("|%s\t\t", G->userList[i]->name);
                 if (strlen(G->userList[i]->name) < 7)
                     printf("\t");
-                printf("|Age %d\t", G->userList[i]->age);
+                printf("|%d\t", G->userList[i]->age);
                 printf("|%s\t\t", G->userList[i]->city);
                 if (strlen(G->userList[i]->city) < 7)
                     printf("\t");
@@ -389,6 +460,9 @@ void NewFriends(Graph *G, int newUserID)
                 if (strlen(G->userList[i]->school) < 7)
                     printf("\t");
                 printf("|%d friends\n", G->userList[i]->numFriends);
+
+                recFriends[recFC] = i;
+                ++recFC;
             }
         }
     }
@@ -441,13 +515,13 @@ void NewFriends(Graph *G, int newUserID)
             MH_Delete(maxHeap, &maxHeapSize);
 
             // Checking if index has been included already or is equal to newUserID
-            if (count[maxIndex] > 0 && maxIndex != newUserID)
+            if (count[maxIndex] > 0 && G->userList[maxIndex] != NULL && maxIndex != newUserID)
             {
                 printf("%d\t", G->userList[maxIndex]->id);
                 printf("|%s\t\t", G->userList[maxIndex]->name);
                 if (strlen(G->userList[maxIndex]->name) < 7)
                     printf("\t");
-                printf("|Age %d\t", G->userList[maxIndex]->age);
+                printf("|%d\t", G->userList[maxIndex]->age);
                 printf("|%s\t\t", G->userList[maxIndex]->city);
                 if (strlen(G->userList[maxIndex]->city) < 7)
                     printf("\t");
@@ -455,6 +529,9 @@ void NewFriends(Graph *G, int newUserID)
                 if (strlen(G->userList[maxIndex]->school) < 7)
                     printf("\t");
                 printf("|%d friends\n", G->userList[maxIndex]->numFriends);
+
+                recFriends[recFC] = maxIndex;
+                ++recFC;
 
                 ++cnt;
                 count[maxIndex] = -1; //  Setting it to -1 to mark that it has been included
@@ -467,13 +544,13 @@ void NewFriends(Graph *G, int newUserID)
         for (int i = 0; i < nU / 2 && cnt < 10; i++)
         {
             // Checking from beginning of frequency table
-            if (count[i] == 0 && i != newUserID)
+            if (count[i] == 0 && G->userList[i] != NULL && i != newUserID)
             {
                 printf("%d\t", G->userList[i]->id);
                 printf("|%s\t\t", G->userList[i]->name);
                 if (strlen(G->userList[i]->name) < 7)
                     printf("\t");
-                printf("|Age %d\t", G->userList[i]->age);
+                printf("|%d\t", G->userList[i]->age);
                 printf("|%s\t\t", G->userList[i]->city);
                 if (strlen(G->userList[i]->city) < 7)
                     printf("\t");
@@ -481,6 +558,9 @@ void NewFriends(Graph *G, int newUserID)
                 if (strlen(G->userList[i]->school) < 7)
                     printf("\t");
                 printf("|%d friends\n", G->userList[i]->numFriends);
+
+                recFriends[recFC] = i;
+                ++recFC;
 
                 ++cnt;
                 count[i] = -1; //  Setting it to -1 to mark that it has been included
@@ -490,13 +570,13 @@ void NewFriends(Graph *G, int newUserID)
                 break;
 
             // Checking from end of frequency table
-            if (count[nU - 1 - i] == 0 && (nU - 1 - i) != newUserID)
+            if (count[nU - 1 - i] == 0 && G->userList[i] != NULL && (nU - 1 - i) != newUserID)
             {
                 printf("%d\t", G->userList[nU - 1 - i]->id);
                 printf("|%s\t\t", G->userList[nU - 1 - i]->name);
                 if (strlen(G->userList[nU - 1 - i]->name) < 7)
                     printf("\t");
-                printf("|Age %d\t", G->userList[nU - 1 - i]->age);
+                printf("|%d\t", G->userList[nU - 1 - i]->age);
                 printf("|%s\t\t", G->userList[nU - 1 - i]->city);
                 if (strlen(G->userList[nU - 1 - i]->city) < 7)
                     printf("\t");
@@ -504,6 +584,9 @@ void NewFriends(Graph *G, int newUserID)
                 if (strlen(G->userList[nU - 1 - i]->school) < 7)
                     printf("\t");
                 printf("|%d friends\n", G->userList[nU - 1 - i]->numFriends);
+
+                recFriends[recFC] = nU - 1 - i;
+                ++recFC;
 
                 ++cnt;
                 count[nU - 1 - i] = -1; //  Setting it to -1 to mark that it has been included
@@ -515,6 +598,7 @@ void NewFriends(Graph *G, int newUserID)
     }
 
     //----------------------------------------------------------------------------//
+    // Allowing user to choose and add friends
 
     printf("\n");
 
@@ -524,7 +608,7 @@ void NewFriends(Graph *G, int newUserID)
 
     while (scanf("%d", &friendID) > 0)
     {
-        if (G->userList[friendID] == NULL || friendID > G->maxUserID)
+        if (G->userList[friendID] == NULL || friendID > G->maxUserID || friendID < 0)
         {
             printf("\nUser with ID %d does not exist.\n", friendID);
             continue;
@@ -536,6 +620,18 @@ void NewFriends(Graph *G, int newUserID)
             continue;
         }
 
+        int i;
+        for (i = 0; i < 12; i++)
+            if (friendID == recFriends[i])
+                break;
+
+        if (i == 12)
+        {
+            printf("\nUser with ID %d was not among those recommended.\n", friendID);
+            continue;
+        }
+
+        // Inserting friendID into new user's friendList
         H_Insert(G, newUserID, friendID);
         count++;
     }
@@ -562,7 +658,3 @@ void delay(int number_of_seconds)
     while (clock() < start_time + milli_seconds)
         ;
 }
-
-//-------------TO BE TAKEN CARE OF-------------//
-
-// Go back option in log in?
