@@ -284,7 +284,7 @@ void RegFriends(Graph *G, int userID, int K)
         return;
     }
 
-    printf("Would you like to make some friends? Here is a list of recommendations!\n\n");
+    printf("\nWould you like to make some friends? Here is a list of recommendations!\n\n");
 
     bool visited[G->numUsers];
     QueuePtr Q = CreateQueue();
