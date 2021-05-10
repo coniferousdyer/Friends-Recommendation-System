@@ -60,6 +60,8 @@ void DeleteSLL(Node *head)
 
 //-------------IntHashtable-------------//
 
+// IHT -> Age
+
 IntHashtable *CreateIHT()
 {
     IntHashtable *I = (IntHashtable *)malloc(sizeof(IntHashtable));
@@ -82,14 +84,14 @@ void IHT_Insert(Graph *G, IntHashtable *I, int id)
 {
     int i = G->userList[id]->age % 100;
 
-    I->array[i] = SLL_Insert(I->array[i], id);
+    I->array[i] = SLL_Insert(I->array[i], id); // Inserting into linked list at array[i]
 }
 
 void IHT_Delete(Graph *G, IntHashtable *I, int id)
 {
     int i = G->userList[id]->age;
 
-    I->array[i] = SLL_Delete(I->array[i], id);
+    I->array[i] = SLL_Delete(I->array[i], id); // Deleting from linked list at array[i]
 }
 
 void IHT_Traverse(Graph *G, IntHashtable *I, int A[], int *n, int age)
@@ -139,7 +141,7 @@ void SHTCity_Insert(Graph *G, StringHashtable *S, int id)
     int i = strlen(G->userList[id]->city) - 1; // Checking length of city of user ID
     int j = G->userList[id]->city[0] - 'A';    // Checking first letter of city of user ID
 
-    S->grid[i][j] = SLL_Insert(S->grid[i][j], id);
+    S->grid[i][j] = SLL_Insert(S->grid[i][j], id); // Inserting into linked list at grid[i][j]
 }
 
 void SHTCity_Delete(Graph *G, StringHashtable *S, int id)
@@ -147,7 +149,7 @@ void SHTCity_Delete(Graph *G, StringHashtable *S, int id)
     int i = strlen(G->userList[id]->city) - 1; // Checking length of city of user ID
     int j = G->userList[id]->city[0] - 'A';    // Checking first letter of city of user ID
 
-    S->grid[i][j] = SLL_Delete(S->grid[i][j], id);
+    S->grid[i][j] = SLL_Delete(S->grid[i][j], id); // Deleting from linked list at grid[i][j]
 }
 
 void SHTCity_Traverse(Graph *G, StringHashtable *S, int A[], int *n, char city[])
@@ -176,7 +178,7 @@ void SHTSchool_Insert(Graph *G, StringHashtable *S, int id)
     int i = strlen(G->userList[id]->school) - 1; // Checking length of city of user ID
     int j = G->userList[id]->school[0] - 'A';    // Checking first letter of city of user ID
 
-    S->grid[i][j] = SLL_Insert(S->grid[i][j], id);
+    S->grid[i][j] = SLL_Insert(S->grid[i][j], id); // Inserting into linked list at grid[i][j]
 }
 
 void SHTSchool_Delete(Graph *G, StringHashtable *S, int id)
@@ -184,7 +186,7 @@ void SHTSchool_Delete(Graph *G, StringHashtable *S, int id)
     int i = strlen(G->userList[id]->school) - 1; // Checking length of city of user ID
     int j = G->userList[id]->school[0] - 'A';    // Checking first letter of city of user ID
 
-    S->grid[i][j] = SLL_Delete(S->grid[i][j], id);
+    S->grid[i][j] = SLL_Delete(S->grid[i][j], id); // Deleting from linked list at grid[i][j]
 }
 
 void SHTSchool_Traverse(Graph *G, StringHashtable *S, int A[], int *n, char school[])

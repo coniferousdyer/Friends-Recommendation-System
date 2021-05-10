@@ -1,5 +1,9 @@
 #include "queue.h"
 
+/*
+ * Implementation of queue needed for BFS in RegFriends 
+*/
+
 NodePtr CreateNode()
 {
     NodePtr N = (NodePtr)malloc(sizeof(Node));
@@ -19,6 +23,7 @@ QueuePtr CreateQueue()
     return Q;
 }
 
+// Enqueues node at rear of queue
 QueuePtr Enqueue(QueuePtr Q, int id)
 {
     if (Q == NULL)
@@ -44,6 +49,7 @@ QueuePtr Enqueue(QueuePtr Q, int id)
     return Q;
 }
 
+// Dequeues node from front of queue
 QueuePtr Dequeue(QueuePtr Q)
 {
     if (Q == NULL)
@@ -70,11 +76,13 @@ QueuePtr Dequeue(QueuePtr Q)
     return Q;
 }
 
+// Checks is queue is empty
 bool Empty(QueuePtr Q)
 {
     return (Q->front == NULL && Q->rear == NULL);
 }
 
+// Frees whole queue
 QueuePtr DeleteQueue(QueuePtr Q)
 {
     if (Q == NULL)
