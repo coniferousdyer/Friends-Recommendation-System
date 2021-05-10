@@ -131,5 +131,7 @@ i.e. Whenever you want to stop adding friends, you can enter a character other t
 
 <strong>Thank you!</strong>
 
+Github Repository Link: https://github.com/coniferousdyer/Friends-Recommendation-System
+
 
 
