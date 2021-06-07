@@ -4,11 +4,11 @@ This is the GitHub repository for Team 20, whose members have been assigned the 
 
 The members of Team 20 are: 
 
-* Jay Ghevariya
-* Konduru Nithin
-* Syed Imami
-* Yashwanth Kottu
-* Arjun Muraleedharan
+* <a href="https://github.com/jayghevariya" target="_blank">Jay Ghevariya</a>
+* <a href="https://github.com/Nithin99m2" target="_blank">Konduru Nithin</a>
+* <a href="https://github.com/syedimami" target="_blank">Syed Imami</a>
+* <a href="https://github.com/Yashwanth67" target="_blank">Yashwanth Kottu</a>
+* <a href="https://github.com/coniferousdyer" target="_blank">Arjun Muraleedharan</a>
 
 <hr>
 
@@ -159,7 +159,7 @@ When the program starts, you will be greeted by the title of the social network,
 
 <hr>
 
-<em>The Friends-Recommendation-System was developed as part of the final project of the Data Structures and Algorithms course, IIIT Hyderabad, by Professor Ravi Kiran S and Professor Sujit Gujar.</em>
+<em>The Friends-Recommendation-System was developed as part of the final project of the Data Structures and Algorithms course, IIIT Hyderabad, under Professor Ravi Kiran S, Professor Sujit Gujar and Teaching Assistant <a href="https://github.com/dixitgarg059" target="_blank">Dixit Garg</a>.</em>
 
 
 
